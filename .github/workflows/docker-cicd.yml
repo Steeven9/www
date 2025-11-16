@@ -1,0 +1,33 @@
+name: docker-cicd
+
+on:
+  push:
+    branches:
+      - "*"
+    tags:
+      - "*"
+
+jobs:
+  build-tags:
+    # Build and push the image with the tag name
+    uses: steeven9/CICD-template/.github/workflows/docker-build.yml@main
+    if: github.ref_type == 'tag'
+    with:
+      image-name: ${{ secrets.DOCKERHUB_USERNAME }}/www:${{ github.ref_name }}
+      push: true
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  build-branches:
+    # Build all branches but push only in main
+    uses: steeven9/CICD-template/.github/workflows/docker-build.yml@main
+    if: github.ref_type == 'branch'
+    with:
+      image-name: ${{ secrets.DOCKERHUB_USERNAME }}/www:latest
+      push: ${{ github.ref_name == 'main' }}
+      ping_webhook: ${{ github.ref_name == 'main' }}
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
