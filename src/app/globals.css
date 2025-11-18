@@ -8,12 +8,21 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav a {
+  @apply text-gray-300 hover:text-blue-400 transition-colors;
+}
+
+#about a {
+  @apply text-blue-300! hover:text-blue-600! transition-colors;
+}
+
+#contact a {
+  @apply w-12 h-12 flex items-center justify-center bg-gray-800 hover:bg-blue-500 rounded-full transition-all text-xl hover:rotate-45;
 }
