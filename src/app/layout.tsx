@@ -44,7 +44,7 @@ export default function RootLayout({
         <main className="w-full">{children}</main>
 
         <footer className="py-8 px-4 border-t border-gray-800 text-center text-gray-500">
-          <p>&copy;2025 Stefano Taillefert</p>
+          <p>&copy;{new Date().getFullYear()} Stefano Taillefert</p>
         </footer>
       </body>
     </html>
