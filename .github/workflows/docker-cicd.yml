@@ -1,6 +1,7 @@
 name: docker-cicd
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - "*"
