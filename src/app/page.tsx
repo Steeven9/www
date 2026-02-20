@@ -46,18 +46,18 @@ export default function Home() {
             <div className="space-y-6 text-lg text-gray-300">
               <p>
                 I&apos;m a passionate developer with expertise in modern web
-                technologies and operation of cloud enterprise platforms.
+                technologies and operation of cloud platforms.
               </p>
               <p>
                 Currently I&apos;m working for{" "}
                 <Link
-                  href="https://www.swisscom.ch/en/about/company.html"
+                  href="https://www.swisscom.ch/en/business.html"
                   target="_blank"
                 >
                   Swisscom
                 </Link>
                 , the leading ICT provider in Switzerland, while also making
-                cool websites with my colleagues at{" "}
+                cool websites with my friends at{" "}
                 <Link href="https://soulsbros.ch" target="_blank">
                   Soulsbros
                 </Link>
@@ -87,7 +87,7 @@ export default function Home() {
                       >
                         {skill}
                       </span>
-                    )
+                    ),
                   )}
                 </div>
               </div>
