@@ -3,7 +3,6 @@
 FROM dhi.io/node:25-dev AS builder
 
 WORKDIR /app
-ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
 COPY package.json yarn.lock ./
