@@ -1,6 +1,6 @@
 # https://hub.docker.com/hardened-images/catalog/dhi/node
 
-FROM dhi.io/node:25-dev AS builder
+FROM dhi.io/node:26-alpine-sfw-dev AS builder
 
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -12,7 +12,10 @@ COPY . .
 RUN yarn build
 
 
-FROM dhi.io/node:25 AS runner
+
+FROM dhi.io/node:26-alpine AS runner
+
+LABEL author="Soulsbros <https://soulsbros.ch>"
 
 WORKDIR /app
 EXPOSE 3000
@@ -21,7 +24,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder --chown=node /app/.next/standalone ./
+COPY --from=builder --chown=node /app/.next/static ./.next/static
 
 CMD ["node", "server.js"]
