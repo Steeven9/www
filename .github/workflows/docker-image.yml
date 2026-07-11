@@ -1,0 +1,49 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "*"
+    tags:
+      - "*"
+
+jobs:
+  lint:
+    uses: soulsbros/CICD-template/.github/workflows/node.yml@main
+
+  build-branches-x64:
+    # Build all branches but push only in main
+    uses: soulsbros/CICD-template/.github/workflows/docker-build.yml@62acc93e4f4dbfe09b3ae2f94e8e5f46ff5573ad # 1.1.2
+    if: github.ref_type == 'branch'
+    needs: lint
+    with:
+      image-name: steeven9/www:latest
+      push: ${{ github.ref_name == 'main' }}
+      ping_webhook: ${{ github.ref_name == 'main' }}
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+
+  build-branches-arm:
+    # Build all branches but push only in main (no ping)
+    uses: soulsbros/CICD-template/.github/workflows/docker-build.yml@62acc93e4f4dbfe09b3ae2f94e8e5f46ff5573ad # 1.1.2
+    if: github.ref_type == 'branch'
+    needs: lint
+    with:
+      image-name: steeven9/www:arm
+      push: ${{ github.ref_name == 'main' }}
+      ping_webhook: false
+      runner: ubuntu-26.04-arm
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+
+  sonarqube:
+    uses: soulsbros/CICD-template/.github/workflows/sonarqube.yml@62acc93e4f4dbfe09b3ae2f94e8e5f46ff5573ad # 1.1.2
+    if: github.ref_name == 'main'
+    needs: lint
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
