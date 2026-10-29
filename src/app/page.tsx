@@ -127,6 +127,13 @@ export default function Home() {
                 tech: ["Docker", "Networking", "Sysadmin", "YAML"],
                 link: "https://lab.soulsbros.ch",
               },
+              {
+                title: "MemoryLine",
+                description:
+                  "A simple way to note down important dates and share them with the people that matter.",
+                tech: ["React", "Next.js", "PostgreSQL"],
+                link: "https://dates.soulsbros.ch",
+              },
             ].map((project) => (
               <div
                 key={project.title}
@@ -179,7 +186,6 @@ export default function Home() {
           <Link
             href="https://github.com/Steeven9"
             target="_blank"
-            rel="noopener noreferrer"
             title="GitHub"
           >
             <Image src={githubLogo} width="32" alt="GitHub logo" />
@@ -187,7 +193,6 @@ export default function Home() {
           <Link
             href="https://linkedin.com/in/stefano-taillefert"
             target="_blank"
-            rel="noopener noreferrer"
             title="LinkedIn"
           >
             <Image src={linkedinLogo} width="32" alt="LinkedIn logo" />
@@ -195,15 +200,13 @@ export default function Home() {
           <Link
             href="https://steamcommunity.com/id/steeven9"
             target="_blank"
-            rel="noopener noreferrer"
             title="Steam"
           >
             <Image src={steamLogo} width="32" alt="Steam logo" />
           </Link>
           <Link
-            href="mailto:steeven@soulsbros.ch"
+            href="mailto:stefano@taillefert.com"
             target="_blank"
-            rel="noopener noreferrer"
             title="Email"
           >
             <Image src={emailLogo} width="32" alt="Email logo" />
