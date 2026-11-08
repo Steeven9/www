@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   // hides the N icon in dev mode
   devIndicators: false,
   // https://nextjs.org/docs/app/building-your-application/configuring/progressive-web-apps#8-securing-your-application
-  async headers() {
+  headers() {
     return [
       {
         source: "/(.*)",
